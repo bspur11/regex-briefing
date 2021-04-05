@@ -5,11 +5,12 @@
 A regular expression is a pattern that is matched against a subject string from left to right. Regular expressions are used to replace text within a string, validating forms, extracting a substring from a string based on a pattern match, and so much more. The term "regular expression" is a mouthful, so you will usually find the term abbreviated to "regex" or "regexp".
 
 ## Summary
-Today we will be looking at and evaluating the following used to match HEX values.
+This will be an examination of the following snippet of regex code that is used to match RGB values.
 
 /^#?([a-f0-9]{6}|[a-f0-9]{3})$/
 
 Below we will breakdown the  details of the individual segments that together are used in this regular expression.
+The following will be a breakdown of this code and a detailed description of what the individual segments mean and how they are used to make RGB values.
  
 
 ## Table of Contents
@@ -91,20 +92,60 @@ In our case, that implies match with 3-character string containing lower case a-
 
 ### Character Classes
 
-### Flags
+In our regex we have one character class that is repeated twice: [a-f0-9]. A character class matches any character enclosed in brackets. For example: [abc] will match "a" or "b" or "c". [-.] will match "-" or ".".
+
+Inside our character class we have two ranges: a-f and 0-9. This means that it matches any character "a" through "f" (lowercase, it will not match uppercase), and "0" through "9". Other examples: [m-p] matches "m", "n", "o" or "p". [3-5] matches "3", "4" or "5"
+
 
 ### Grouping and Capturing
 
+Grouping and Capturing: ()
+
+Code Snippet: ([a-f0-9]{6}|[a-f0-9]{3})
+
+Description: The () groups the regular expression between them. The grouping treats multiple characters as a single unit. This can proof useful when extracting information using any programming language. This group of data will be exposed in the form of an array. Values can be accessed using an index on the result of the match.
+
+Example: (dog){3} matched dogdogdog. The unit of characters 'dog' would need to repeat 3 times indicated in the quantifier.
+
+In our case, the grouped expression is a bracket expression whose details are provided in the section below. Ultimately the end string anchor $ is applied to this grouping.
+
+
 ### Bracket Expressions
+
+Bracket Expression: []
+
+Code Snippet: [a-f0-9]
+
+Description: Bracket expression is a regex that will match a specific pattern of characters (alphabetic, numeric, special characters, symbols etc..) defined within the brackets. Typically, a hyphen is used to describe a set or range of characters e.g. [a-z]. It is possible to use the ^ metacharacter to negate what is in between the brackets.
+
+Example: [a-d 1-3] indicates that the string must include at least 1 character that is between a and d or 1-3
+
+In our reg ex, the bracket [] expression indicates matching a string that has any lower-case character between a-f or any integer between 0-9
+
 
 ### Greedy and Lazy Match
 
-### Boundaries
+Code Snippet: [a-f0-9]{6} Code Snippet: [a-f0-9]{3}
 
-### Back-references
+Quantifier: {}
 
-### Look-ahead and Look-behind
+Description: Greedy means match the longest possible string. Lazy means match the shortest possible string.
+
+Example: w.+l matches well in well but the lazy w.+?l matches wel
+
+Normal quantifiers are greedy, causing the regex to match as many occurrences of a particular pattern as possible. However, if ? was appended, the quantifier would become lazy-- causing the regex to match as few occurrences as possible. In our case, the quantifier is greedy.
+
 
 ## Author
 
-A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
+Brad Spurrell
+I am an old tradesman with 30 years experience in the printing industry. About a year ago I moved into the digital department and started working  on a computer for the first time in my career. I had a personal computer at home but that was just for internet and paying bills. I liked what a computer could do so now I am here fumbling along trying to learn and keep up as best I can. This has been the best and most difficult experience of my life and I will not give up until I succeed.
+My website (still under construction) is https://bspur11.github.io/brad-port/. As I mentioned it needs some, or a lot of work.
+Git Repo: https://github.com/bspur11/regex-briefing.git
+Gist: https://gist.github.com/bspur11/69a3799b3a8e507009cf3b59b19ebd18
+
+
+
+
+
+
